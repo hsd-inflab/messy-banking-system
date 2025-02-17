@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 public class BankingApp {
     
+    public List<Account> accounts = new ArrayList<>();
+    
     public BankingApp() {
         scanner = new Scanner(System.in);
     }
@@ -31,61 +33,69 @@ public class BankingApp {
                 System.out.println("Exiting.");
                 break;
             } else if (command.equalsIgnoreCase("deposit")) {
-                processDeposit();
+                System.out.print("Enter account number: ");
+                int accNum = Integer.parseInt(scanner.nextLine());
+                System.out.print("Enter amount: ");
+                double amount = Double.parseDouble(scanner.nextLine());
+                updateAccount(accNum, amount);
+                Account acc = null;
+                for (Account acc1 : accounts) {
+                    if (acc1.accountNumber == accNum) {
+                        acc = acc1;
+                        break;
+                    }
+                }
+                if (acc != null) {
+                    System.out.println(acc);
+                } else {
+                    System.out.println("Account not found.");
+                }
             } else if (command.equalsIgnoreCase("withdraw")) {
-                processWithdraw();
+                System.out.print("Enter account number: ");
+                int accNum = Integer.parseInt(scanner.nextLine());
+                System.out.print("Enter amount: ");
+                double amount = Double.parseDouble(scanner.nextLine());
+                updateAccountNegative(accNum, amount);
+                Account acc = null;
+                for (Account acc1 : accounts) {
+                    if (acc1.accountNumber == accNum) {
+                        acc = acc1;
+                        break;
+                    }
+                }
+                if (acc != null) {
+                    System.out.println(acc);
+                } else {
+                    System.out.println("Account not found.");
+                }
             } else if (command.equalsIgnoreCase("show")) {
-                processShow();
+                System.out.print("Enter account number: ");
+                int accNum = Integer.parseInt(scanner.nextLine());
+                Account acc = null;
+                for (Account acc1 : accounts) {
+                    if (acc1.accountNumber == accNum) {
+                        acc = acc1;
+                        break;
+                    }
+                }
+                if (acc != null) {
+                    System.out.println(acc);
+                } else {
+                    System.out.println("Account not found.");
+                }
             }
         }
     }
 
-    private void processDeposit() {
-        System.out.print("Enter account number: ");
-        int accNum = Integer.parseInt(scanner.nextLine());
-        System.out.print("Enter amount: ");
-        double amount = Double.parseDouble(scanner.nextLine());
-        updateAccount(accNum, amount);
-        displayAccount(accNum);
-    }
-
-    private void processWithdraw() {
-        System.out.print("Enter account number: ");
-        int accNum = Integer.parseInt(scanner.nextLine());
-        System.out.print("Enter amount: ");
-        double amount = Double.parseDouble(scanner.nextLine());
-        updateAccountNegative(accNum, amount);
-        displayAccount(accNum);
-    }
-
-    private void processShow() {
-        System.out.print("Enter account number: ");
-        int accNum = Integer.parseInt(scanner.nextLine());
-        displayAccount(accNum);
-    }
-
-    private void displayAccount(int accNum) {
-        Account acc = findAccount(accNum);
-        if (acc != null) {
-            System.out.println(acc);
-        } else {
-            System.out.println("Account not found.");
-        }
-    }
-
-    public List<Account> accounts = new ArrayList<>();
-
-    public Account findAccount(int accountNumber) {
-        for (Account acc : accounts) {
-            if (acc.accountNumber == accountNumber) {
-                return acc;
-            }
-        }
-        return null;
-    }
 
     public void updateAccount(int accountNumber, double amount) {
-        Account acc = findAccount(accountNumber);
+        Account acc = null;
+        for (Account acc1 : accounts) {
+            if (acc1.accountNumber == accountNumber) {
+                acc = acc1;
+                break;
+            }
+        }
         boolean check = false;
         if (acc != null) {
             double tempBalance = acc.balance;
@@ -110,7 +120,13 @@ public class BankingApp {
     }
 
     public void updateAccountNegative(int accountNumber, double amount) {
-        Account acc = findAccount(accountNumber);
+        Account acc = null;
+        for (Account acc1 : accounts) {
+            if (acc1.accountNumber == accountNumber) {
+                acc = acc1;
+                break;
+            }
+        }
         if (acc != null) {
             if (acc.balance <= amount) {
                 System.out.println("Insufficient funds.");
