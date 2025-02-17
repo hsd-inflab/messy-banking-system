@@ -1,4 +1,8 @@
-# Requirements for extendind and improving
+# Messy Banking System
+
+This project is a simple banking system that allows to create accounts, deposit and withdraw money, and view account details. It is intentionally designed to violate many coding guidelines and best practices. The goal is for students to gradually improve and extend the system by addressing the issues and implementing new features.
+
+# Some Ideas for Improvements and Extensions
 
 - **Add Transaction History**:
    - Store each transaction (deposit, withdrawal) in the `Account` class.

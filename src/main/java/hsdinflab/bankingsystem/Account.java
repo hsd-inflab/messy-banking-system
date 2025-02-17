@@ -1,9 +1,7 @@
 package hsdinflab.bankingsystem;
 
 public class Account {
-    public int accountNumber;
-    public String owner;
-    public double balance;
+    public int accountNumber; public String owner; public double balance;
 
     public Account(int accountNumber, String owner, double balance) {
         this.accountNumber = accountNumber;

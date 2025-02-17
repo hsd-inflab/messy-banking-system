@@ -5,12 +5,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class BankingApp {
-    private Scanner scanner;
-
+    
     public BankingApp() {
         scanner = new Scanner(System.in);
     }
-
+    
+    private Scanner scanner;
+    
     public static void main(String[] args) {
         // Create bank and add two accounts.
         BankingApp app = new BankingApp();
